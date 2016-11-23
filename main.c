@@ -6,7 +6,7 @@
 /*   By: mwooden <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/20 18:52:58 by mwooden           #+#    #+#             */
-/*   Updated: 2016/11/23 10:11:17 by mwooden          ###   ########.fr       */
+/*   Updated: 2016/11/23 11:35:34 by mwooden          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,19 @@
 #include "fillit.h"
 #include <stdio.h>
 
-char	**create_list(char *file, int i)
+char	**create_list(int i, int num)
 {
-	int		num;
 	char	**list;
 
-	num = (ft_strlen(file) / 21) + 1;
-	if (!list = (char **)malloc(sizeof(char *) * num))
-		error;
+	if (!(list = (char **)malloc(sizeof(char *) * num)))
+		error();
 	while (i < num)
 	{
-		if (!list[i] = (char *)malloc(17))
-			error;
+		if (!(list[i] = (char *)malloc(17)))
+			error();
 		i++;
 	}
+	return (list);
 }
 
 void	*my_realloc(void *ptr, size_t size)
@@ -60,13 +59,14 @@ char	*get(int fd, int i)
 		i++;
 	}
 	if (red != 20)
-		error;
+		error();
 	return (buff);
 }
 
 int		main(int argc, char **argv)
 {
 	int		fd;
+	int		num;
 	char	*file;
 	char	**list;
 
@@ -77,6 +77,7 @@ int		main(int argc, char **argv)
 	}
 	fd = open(argv[1], O_RDONLY);
 	file = get(fd, 2);
-	list = create_list(file, 0);
-	proceed(file, list);
+	num = (ft_strlen(file) / 21) + 1;
+	list = create_list(0, num);
+	proceed(file, list, num);
 }
